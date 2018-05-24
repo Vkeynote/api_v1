@@ -30,6 +30,11 @@ def editone(name):
 	langs[0]['name'] = request.json['name']
 	return jsonify({'language': langs[0]})
 
+@app.route('/lang/<string:name>', methods=['DELETE'])
+def removeone(name):
+	lang = [language for language in languages if language['name'] == name]
+	languages.remove(lang[0])
+	return jsonify({'language': lang[0]})
 
 if __name__=='__main__':
-	app.run(debug=True, port=8080)
+	app.run(debug=True)
